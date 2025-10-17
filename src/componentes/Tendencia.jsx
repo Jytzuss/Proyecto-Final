@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Tendencia.css";
 
 function Tendencia() {
@@ -15,16 +15,14 @@ function Tendencia() {
   ].filter(Boolean);
 
 
-  const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
+  const currentKeyIndex = useRef(0);
 
-  const getApiKey = () => apiKeys[currentKeyIndex] || apiKeys[0];
-
+  const getApiKey = () => apiKeys[currentKeyIndex.current] || apiKeys[0];
 
   const rotateApiKey = () => {
-    setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % apiKeys.length);
-    console.warn(` Cambiando a la siguiente API key...`);
+    console.warn("Cambiando a la siguiente API key...");
+    currentKeyIndex.current = (currentKeyIndex.current + 1) % apiKeys.length;
   };
-
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -36,12 +34,17 @@ function Tendencia() {
       const data = await res.json();
 
 
-      if ((res.status === 402 || res.status === 429) && retryCount < apiKeys.length) {
-        console.log(` Key ${currentKeyIndex + 1} falló (${res.status}).`);
+      if (
+        (res.status === 402 || res.status === 429) &&
+        retryCount < apiKeys.length
+      ) {
+        console.log(`Key ${currentKeyIndex.current + 1} falló (${res.status}).`);
         rotateApiKey();
-        await delay(1200);
+        await delay(1000);
         return cargarNoticias(retryCount + 1);
       }
+
+      if (!res.ok) throw new Error("Error al obtener noticias");
 
       setNoticias(data.data || []);
     } catch (error) {
@@ -54,7 +57,6 @@ function Tendencia() {
     e.preventDefault();
     if (!busqueda.trim()) return;
     setCargando(true);
-
     try {
       const url = `https://api.thenewsapi.com/v1/news/all?search=${encodeURIComponent(
         busqueda
@@ -62,11 +64,13 @@ function Tendencia() {
       const res = await fetch(url);
       const data = await res.json();
 
-      if ((res.status === 402 || res.status === 429) && retryCount < apiKeys.length) {
-        console.log(` Key ${currentKeyIndex + 1} falló en búsqueda.`);
+      if (
+        (res.status === 402 || res.status === 429) &&
+        retryCount < apiKeys.length
+      ) {
+        console.log(`Key ${currentKeyIndex.current + 1} falló (${res.status}).`);
         rotateApiKey();
-        await delay(1200);
-        setCargando(false);
+        await delay(1000);
         return buscarNoticias(e, retryCount + 1);
       }
 
@@ -78,22 +82,24 @@ function Tendencia() {
     }
   };
 
- 
+
   useEffect(() => {
     cargarNoticias();
-  }, [currentKeyIndex]);
+  }, []);
 
   return (
     <div className="container-tendencia">
       <div>
         <form onSubmit={buscarNoticias}>
-          <input
-            type="search"
-            placeholder="Noticias, Fútbol, Moda, Farándula, País..."
-            className="buscarnoticias"
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-          />
+          <div>
+            <input
+              type="search"
+              placeholder="Noticias, Fútbol, Moda, Farándula, País..."
+              className="buscarnoticias"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+            />
+          </div>
         </form>
         <br />
         <button onClick={cargarNoticias}>Ver tendencias</button>
@@ -112,32 +118,27 @@ function Tendencia() {
 
       <div className="cuadro-tendencia">
         <h3>Tendencias de Hoy</h3>
-        {cargando ? (
-          <p>Cargando noticias...</p>
-        ) : noticias.length === 0 ? (
-          <p>No hay noticias disponibles</p>
-        ) : (
-          noticias.map((n, i) => (
-            <div key={i} className="tendencia-item">
-              <a
-                href={n.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="titulo"
-              >
-                {n.title}
-              </a>
-              <p className="fuente">{n.source}</p>
-              <p className="hora">
-                {new Date(n.published_at).toLocaleTimeString("es-CO", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}{" "}
-                · {new Date(n.published_at).toLocaleDateString("es-CO")}
-              </p>
-            </div>
-          ))
-        )}
+        {noticias.length === 0 && <p>Cargando noticias...</p>}
+        {noticias.map((n, i) => (
+          <div key={i} className="tendencia-item">
+            <a
+              href={n.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="titulo"
+            >
+              {n.title}
+            </a>
+            <p className="fuente">{n.source}</p>
+            <p className="hora">
+              {new Date(n.published_at).toLocaleTimeString("es-CO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}{" "}
+              · {new Date(n.published_at).toLocaleDateString("es-CO")}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
