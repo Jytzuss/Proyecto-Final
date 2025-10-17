@@ -76,6 +76,9 @@
   background: transparent;
   z-index: 40;
 }
+.close-menu-btn{
+  display: none;
+}
 
 
 @media (max-width: 1024px) {
@@ -119,6 +122,21 @@
    .seguidos li:hover {
     background: none;
   }
+  .close-menu-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  padding: 5px;
+}
+
+.close-menu-btn:hover {
+  opacity: 0.7;
+}
 
 
 }

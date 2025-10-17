@@ -26,6 +26,7 @@ function Header() {
 
   const toggleMenu = () => setShowMenu(!showMenu);
   const handleTabClick = (tab) => setActiveTab(tab);
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <div className='contenedor-header'>
@@ -53,15 +54,20 @@ function Header() {
 
       {showMenu && (
         <div
-          className='menu-overlay'onClick={() => setShowMenu(false)}
+          className='menu-overlay'
+          onClick={closeMenu}
         />
       )}
 
       {showMenu && (
         <div className='menu-slide'>
+          <button 
+            className='close-menu-btn'
+            onClick={closeMenu}
+            title='Cerrar menú'>✕</button>
           <h3>Menú</h3>
-          <a href="./Perfil">Perfil</a>
-          <a href="./tendencia">Tendencias</a>
+          <a href="./Perfil" onClick={closeMenu}>Perfil</a>
+          <a href="./tendencia" onClick={closeMenu}>Tendencias</a>
           <a href="/" onClick={handleLogout}>Cerrar sesión</a>
         </div>
       )}
