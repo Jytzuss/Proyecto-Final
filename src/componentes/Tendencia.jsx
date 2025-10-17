@@ -23,15 +23,18 @@ function Tendencia() {
     setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % apiKeys.length);
   };
 
-  const cargarNoticias = async () => {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const cargarNoticias = async (retryCount = 0) => {
     try {
       const url = `https://api.thenewsapi.com/v1/news/top?limit=5&api_token=${getApiKey()}`;
       const res = await fetch(url);
       const data = await res.json();
 
-      if (res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) {
+      if ((res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) && retryCount < apiKeys.length) {
         rotateApiKey();
-        return cargarNoticias();
+        await delay(1000);
+        return cargarNoticias(retryCount + 1);
       }
 
       setNoticias(data.data || []);
@@ -40,7 +43,7 @@ function Tendencia() {
     }
   };
 
-  const buscarNoticias = async (e) => {
+  const buscarNoticias = async (e, retryCount = 0) => {
     e.preventDefault();
     if (!busqueda.trim()) return;
     setCargando(true);
@@ -51,10 +54,11 @@ function Tendencia() {
       const res = await fetch(url);
       const data = await res.json();
 
-      if (res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) {
+      if ((res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) && retryCount < apiKeys.length) {
         rotateApiKey();
+        await delay(1000);
         setCargando(false);
-        return buscarNoticias(e);
+        return buscarNoticias(e, retryCount + 1);
       }
 
       setNoticias(data.data || []);
