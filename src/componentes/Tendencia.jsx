@@ -11,7 +11,7 @@ function Tendencia() {
     import.meta.env.VITE_GNEWS_API_KEY_,
     import.meta.env.VITE_GNEWS_API_KEY_2,
     import.meta.env.VITE_GNEWS_API_KEY_3,
-    import.meta.env.VITE_GNEWS_API_KEY_4
+    import.meta.env.VITE_GNEWS_API_KEY_4,
   ].filter(Boolean); 
 
   const [apiIndex, setApiIndex] = useState(0);
@@ -71,6 +71,8 @@ function Tendencia() {
   useEffect(() => {
     cargarNoticias();
   }, []);
+
+  console.log(" API Keys cargadas:", apiKeys);
 
   return (
     <div className="container-tendencia">
