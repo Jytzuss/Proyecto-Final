@@ -61,7 +61,7 @@ function Header() {
         <div className='menu-slide'>
           <h3>Menú</h3>
           <a href="./Perfil">Perfil</a>
-          <a href="./Tendencia">Tendencias</a>
+          <a href="./tendencia">Tendencias</a>
           <a href="/" onClick={handleLogout}>Cerrar sesión</a>
         </div>
       )}

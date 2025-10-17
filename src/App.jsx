@@ -7,6 +7,7 @@ import Perfil from './componentes/Perfil';
 import Post from './componentes/Post';
 import PerfilPublico from './componentes/PerfilPublico';
 import AuthChecker from './componentes/AuthChecker';
+import Tendencia from './componentes/Tendencia';
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path='/' element={<Login />} />
+          <Route path='tendencia' element={<Tendencia />} />
 
           <Route
             path='/home'
