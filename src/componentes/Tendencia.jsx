@@ -9,7 +9,7 @@ function Tendencia() {
   const apiKey = import.meta.env.VITE_THENEWS_API_KEY;
 
   const cargarNoticias = async () => {
-    const url = `https://api.thenewsapi.com/v1/news/top?locale=es-CO&limit=5&api_token=${apiKey}`;
+    const url = `https://api.thenewsapi.com/v1/news/top?locale=es&limit=5&api_token=${apiKey}`;
     const res = await fetch(url);
     const data = await res.json();
     setNoticias(data.data || []);
