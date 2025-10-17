@@ -66,6 +66,9 @@
   color: #999;
   font-size: 0.8rem;
 }
+.back_fecha{
+  display: none;
+}
 
 @media (max-width: 768px) {
   .container-tendencia {
@@ -119,5 +122,8 @@
   .hora {
     font-size: 0.8rem;
   }
+  .back_fecha{
+ display: flex;
+}
 }
 
