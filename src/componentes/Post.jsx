@@ -24,7 +24,7 @@ function Post() {
     const loadUser = () => {
       const localUser = JSON.parse(localStorage.getItem("user"));
       if (!localUser) {
-        console.log("⚠️ No hay usuario en localStorage");
+        console.log("No hay usuario en localStorage");
         return;
       }
 

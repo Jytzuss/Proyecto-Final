@@ -66,3 +66,58 @@
   color: #999;
   font-size: 0.8rem;
 }
+
+@media (max-width: 768px) {
+  .container-tendencia {
+    width: 100%;
+    padding-left: 0;
+    position: static; 
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .tendencias {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .buscarnoticias {
+    width: 90%;
+    margin: 10px auto;
+    height: 38px;
+    padding-left: 15px;
+  }
+
+  .cuadro-premium {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    height: auto;
+  }
+
+  .btn-premium {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .cuadro-tendencia {
+    width: 90%;
+    margin: 10px auto;
+    padding: 12px;
+  }
+
+  .tendencias h3 {
+    font-size: 1rem;
+  }
+
+  .titulo {
+    font-size: 0.95rem;
+  }
+
+  .fuente,
+  .hora {
+    font-size: 0.8rem;
+  }
+}
+

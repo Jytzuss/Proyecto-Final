@@ -17,7 +17,7 @@ function Likes({ postId, userId, likes, onLikeChange }) {
 
   const handleLike = async () => {
     if (!userId) {
-      alert("Debes estar logueado para dar like");
+      alert("Debes estar logueado");
       return;
     }
 
