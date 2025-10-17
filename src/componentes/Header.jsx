@@ -5,24 +5,24 @@ import supabase from "../supabaseClient";
 
 
 
-function Header({ unreadCount }) {
+function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [activeTab, setActiveTab] = useState("for-you");
 
-  const handleLogout = async () => {
-    try {
-      await supabase.auth.signOut();
+ const handleLogout = async () => {
+  try {
+    await supabase.auth.signOut();
 
-      localStorage.removeItem("user");
-      localStorage.clear();
+    localStorage.removeItem("user");
+    localStorage.clear();
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 300);
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error.message);
-    }
-  };
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 300);
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error.message);
+  }
+};
 
   const toggleMenu = () => setShowMenu(!showMenu);
   const handleTabClick = (tab) => setActiveTab(tab);
@@ -61,14 +61,13 @@ function Header({ unreadCount }) {
 
       {showMenu && (
         <div className='menu-slide'>
-          <button
+          <button 
             className='close-menu-btn'
             onClick={closeMenu}
             title='Cerrar menú'>✕</button>
           <h3>Menú</h3>
           <a href="./Perfil" onClick={closeMenu}>Perfil</a>
           <a href="./tendencia" onClick={closeMenu}>Tendencias</a>
-          <a href="/notificaciones" onClick={closeMenu}>Notificaciones{unreadCount > 0 && <span className="badge">{unreadCount}</span>}</a>
           <a href="/" onClick={handleLogout}>Cerrar sesión</a>
         </div>
       )}

@@ -1,3 +1,14 @@
+import { useState, useEffect } from 'react'
+import './App.css'
+import Menu from './componentes/Menu';
+import Login from './componentes/Login'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Perfil from './componentes/Perfil';
+import Post from './componentes/Post';
+import PerfilPublico from './componentes/PerfilPublico';
+import AuthChecker from './componentes/AuthChecker';
+import Tendencia from './componentes/Tendencia';
+
 function App() {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,44 +23,40 @@ function App() {
 
   return (
     <>
-      {!shouldHideMenu && isLoggedIn && <Menu />}
 
+      {!shouldHideMenu && isLoggedIn}
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/tendencia" element={<Tendencia />} />
+          <Route path='/' element={<Login />} />
+          <Route path='tendencia' element={<Tendencia />} />
+
           <Route
-            path="/home"
+            path='/home'
             element={
               <AuthChecker>
                 <Post />
               </AuthChecker>
             }
           />
-          <Route path="/perfil/:userId" element={<PerfilPublico />} />
+
           <Route
-            path="/perfil"
+            path='/perfil/:userId'
+            element={<PerfilPublico />}
+          />
+
+          <Route
+            path='/perfil'
             element={
               <AuthChecker>
                 <Perfil />
               </AuthChecker>
             }
           />
-          <Route
-            path="/notificaciones"
-            element={
-              <AuthChecker>
-                <Notificaciones
-                  notifications={[]} // temporal
-                  onMarkAsRead={() => {}}
-                  onClearAll={() => {}}
-                  marcarTodasComoLeidas={() => {}}
-                />
-              </AuthChecker>
-            }
-          />
         </Routes>
       </div>
+
     </>
-  );
+  )
 }
+
+export default App
