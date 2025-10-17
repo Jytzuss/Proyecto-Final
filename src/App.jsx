@@ -8,7 +8,7 @@ import Post from './componentes/Post';
 import PerfilPublico from './componentes/PerfilPublico';
 import AuthChecker from './componentes/AuthChecker';
 import Tendencia from './componentes/Tendencia';
-import Notificaciones from './pages/Notificaciones';
+import Notificaciones from './componentes/Notificaciones';
 
 function App() {
   const location = useLocation();
