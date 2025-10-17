@@ -91,7 +91,7 @@ function Login() {
 
         <p className='tyc'>
           Al registrarte, aceptas los <span className="color">Términos de servicio</span> y <span className="color">la Política de <br /> privacidad</span>, incluida la política de <span className="color">Uso de Cookies</span>.
-        </p> <br />
+        </p>
         <br />
         <h3>¿Ya tienes una cuenta?</h3>
         <button className='boton-login' onClick={() => setShowLoginModal(true)}>
