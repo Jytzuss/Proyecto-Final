@@ -11,17 +11,16 @@ function Login() {
   const [ShowLoginModal, setShowLoginModal] = useState(false);
 
   const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: { 
-      redirectTo: window.location.origin + "/home"
-    },
-  });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: "http://localhost:5173/home" }
+    });
 
-  if (error) {
-    console.error("Error en Google login:", error.message);
-  }
-};
+    if (error) {
+      console.error("Error en Google login:", error.message);
+      alert("Error al iniciar sesión con Google");
+    }
+  };
 
   useEffect(() => {
   const checkUser = async () => {
