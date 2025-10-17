@@ -36,7 +36,7 @@ function Tendencia() {
     <div className="container-tendencia">
       <div>
         <form onSubmit={buscarNoticias}>
-          <div>
+          <div> 
             <input
               type="search"
               placeholder="Noticias, Fútbol, Moda, Farándula, País..."

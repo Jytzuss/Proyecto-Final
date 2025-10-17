@@ -157,7 +157,7 @@ function PerfilPublico() {
                   className="post-card"
                   onClick={() => setSelectedPost(post)}
                   style={{ cursor: "pointer" }}>
-                    <div style={{justifyContent:"space-between", display:"flex"}}>
+                    <div style={{justifyContent:"space-between", display:"flex", gap:"20px"}}>
                     <div style={{display:"flex", gap:"7px"}}>
                       <img
                       src={userData?.foto_perfil}
@@ -169,7 +169,7 @@ function PerfilPublico() {
                     <h4>{userData?.user}</h4>
                     </div>
                     <div>
-                      <p>{new Date(post.fecha).toLocaleDateString("es-CO", {
+                      <p style={{fontSize:"9px"}}>{new Date(post.fecha).toLocaleDateString("es-CO", {
                         day: "numeric",
                         month: "long",
                         hour: "2-digit",
