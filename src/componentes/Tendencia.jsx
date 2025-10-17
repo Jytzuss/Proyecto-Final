@@ -20,7 +20,6 @@ function Tendencia() {
   const getApiKey = () => apiKeys[currentKeyIndex.current] || apiKeys[0];
 
   const rotateApiKey = () => {
-    console.warn("Cambiando a la siguiente API key...");
     currentKeyIndex.current = (currentKeyIndex.current + 1) % apiKeys.length;
   };
 
@@ -28,29 +27,22 @@ function Tendencia() {
 
 
   const cargarNoticias = async (retryCount = 0) => {
-    try {
-      const url = `https://api.thenewsapi.com/v1/news/top?limit=5&locale=es-CO&api_token=${getApiKey()}`;
-      const res = await fetch(url);
-      const data = await res.json();
+  try {
+    const url = `https://api.thenewsapi.com/v1/news/all?search=colombia&locale=es-CO&limit=5&api_token=${getApiKey()}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-
-      if (
-        (res.status === 402 || res.status === 429) &&
-        retryCount < apiKeys.length
-      ) {
-        console.log(`Key ${currentKeyIndex.current + 1} falló (${res.status}).`);
-        rotateApiKey();
-        await delay(1000);
-        return cargarNoticias(retryCount + 1);
-      }
-
-      if (!res.ok) throw new Error("Error al obtener noticias");
-
-      setNoticias(data.data || []);
-    } catch (error) {
-      console.error("Error al cargar noticias:", error);
+    if ((res.status === 429 || res.status === 402) && retryCount < apiKeys.length) {
+      rotateApiKey();
+      await delay(1000);
+      return cargarNoticias(retryCount + 1);
     }
-  };
+
+    setNoticias(data.data || []);
+  } catch (error) {
+    console.error("Error al cargar noticias:", error);
+  }
+};
 
 
   const buscarNoticias = async (e, retryCount = 0) => {
