@@ -76,9 +76,6 @@
   background: transparent;
   z-index: 40;
 }
-.close-menu-btn{
-  display: none;
-}
 
 
 @media (max-width: 1024px) {
