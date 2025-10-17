@@ -35,8 +35,7 @@ function PostDetail({ post, onClose, userData }) {
           <div></div>
         </div>
 
-        <div className="post-detail-content">
-          {/* Sección del autor con botón seguir */}
+        <div className="post-detail-content"> 
           <div className="post-author">
             <img
               src={post.registro?.foto_perfil || "/user.svg"}

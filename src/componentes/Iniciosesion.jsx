@@ -55,7 +55,7 @@ function Iniciosesion({ setShowLoginModal }) {
             });
 
             if (error) throw error;
-            console.log("🔗 Redirigiendo con Google:", data);
+            console.log("Redirigiendo con Google:", data);
         } catch (err) {
             console.error("Error en Google Login:", err.message);
             alert("Error al iniciar con Google");

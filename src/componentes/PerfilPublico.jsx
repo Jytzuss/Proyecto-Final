@@ -82,7 +82,7 @@ function PerfilPublico() {
       <div className='container-perfil'>
         <p><a href="/home"><img src="/arrow.svg" width={40} alt="" /></a></p>
 
-        {/* Foto de portada */}
+ 
         <div className='foto-portada'>
           {userData?.foto_portada ? (
             <img src={userData.foto_portada} alt="Portada" />
@@ -91,7 +91,7 @@ function PerfilPublico() {
           )}
         </div>
 
-        {/* Header del perfil */}
+
         <div className='perfil-header'>
           <div className='foto-perfil-container'>
             <img
@@ -112,7 +112,7 @@ function PerfilPublico() {
           )}
         </div>
 
-        {/* Información del usuario */}
+
         <div className='info-usuario'>
           <h2>{userData?.user}</h2>
            <p>
@@ -143,7 +143,7 @@ function PerfilPublico() {
 
         <hr />
 
-        {/* Sección de posts */}
+
         <div className='seccion-posts'>
           <h3>Posts</h3>
 
@@ -198,7 +198,7 @@ function PerfilPublico() {
         </div>
       </div>
 
-      {/* Modal de detalle del post */}
+
       {selectedPost && (
         <PostDetail
           post={selectedPost}

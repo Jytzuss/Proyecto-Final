@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setIsLoggedIn(!!user);
-  }, [location]); // ✅ Agregar location para actualizar cuando cambie
+  }, [location]);
 
   const hideMenuRoutes = ["/", "/login", "/registro"];
   const shouldHideMenu = hideMenuRoutes.includes(location.pathname.toLowerCase());

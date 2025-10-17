@@ -249,8 +249,8 @@ input:focus[type="file"] {
     }
     .like_comen{
     display: flex;
-    padding-left: 50px;
+    padding-left: 25px;
     justify-content: center;
-    gap: 200px;
+    gap: 190px;
 }
 }
