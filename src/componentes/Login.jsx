@@ -11,20 +11,16 @@ function Login() {
   const [ShowLoginModal, setShowLoginModal] = useState(false);
 
   const handleGoogleLogin = async () => {
-  const redirectUrl = window.location.hostname === 'localhost' 
-    ? "http://localhost:5173/home" 
-    : "https://proyecto-final-blond-ten.vercel.app/home";
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: "https://proyecto-final-blond-ten.vercel.app/home" }
+    });
 
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: redirectUrl }
-  });
-
-  if (error) {
-    console.error("Error en Google login:", error.message);
-    alert("Error al iniciar sesión con Google");
-  }
-};
+    if (error) {
+      console.error("Error en Google login:", error.message);
+      alert("Error al iniciar sesión con Google");
+    }
+  };
 
   useEffect(() => {
   const checkUser = async () => {
