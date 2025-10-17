@@ -6,26 +6,64 @@ function Tendencia() {
   const [busqueda, setBusqueda] = useState("");
   const [cargando, setCargando] = useState(false);
 
-  const apiKey = import.meta.env.VITE_THENEWS_API_KEY;
+  const apiKeys = [
+    import.meta.env.VITE_THENEWS_API_KEY,
+    import.meta.env.VITE_THENEWS_API_KEY_2,
+    import.meta.env.VITE_THENEWS_API_KEY_3,
+    import.meta.env.VITE_THENEWS_API_KEY_4,
+
+  ].filter(Boolean);
+
+  const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
+
+  const getApiKey = () => {
+    return apiKeys[currentKeyIndex] || apiKeys[0];
+  };
+
+  const rotateApiKey = () => {
+    setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % apiKeys.length);
+  };
 
   const cargarNoticias = async () => {
-    const url = `https://api.thenewsapi.com/v1/news/top?limit=5&api_token=${apiKey}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    setNoticias(data.data || []);
+    try {
+      const url = `https://api.thenewsapi.com/v1/news/top?limit=5&api_token=${getApiKey()}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (res.status === 429 || data.meta?.status === 429) {
+        rotateApiKey();
+        return cargarNoticias();
+      }
+
+      setNoticias(data.data || []);
+    } catch (error) {
+      console.error("Error al cargar noticias:", error);
+    }
   };
 
   const buscarNoticias = async (e) => {
     e.preventDefault();
     if (!busqueda.trim()) return;
     setCargando(true);
-    const url = `https://api.thenewsapi.com/v1/news/all?search=${encodeURIComponent(
-      busqueda
-    )}&locale=es-CO&limit=6&api_token=${apiKey}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    setNoticias(data.data || []);
-    setCargando(false);
+    try {
+      const url = `https://api.thenewsapi.com/v1/news/all?search=${encodeURIComponent(
+        busqueda
+      )}&locale=es-CO&limit=6&api_token=${getApiKey()}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (res.status === 429 || data.meta?.status === 429) {
+        rotateApiKey();
+        setCargando(false);
+        return buscarNoticias(e);
+      }
+
+      setNoticias(data.data || []);
+      setCargando(false);
+    } catch (error) {
+      console.error("Error al buscar noticias:", error);
+      setCargando(false);
+    }
   };
 
   useEffect(() => {
