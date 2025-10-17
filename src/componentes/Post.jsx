@@ -7,7 +7,7 @@ import Menu from "./Menu";
 import PostDetail from "./PostDetail";
 import Likes from "./Likes";
 import { useNavigate } from 'react-router-dom';
-
+import { useNotifications } from '../hooks/useNotifications';
 
 
 
@@ -19,6 +19,12 @@ function Post() {
   const [userData, setUserData] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const navigate = useNavigate();
+
+  const {
+    notifications,
+    unreadCount,
+    crearNotificacion
+  } = useNotifications(userData?.id);
 
   useEffect(() => {
     const loadUser = () => {
@@ -232,7 +238,7 @@ function Post() {
                       style={{ cursor: "pointer" }}
                     >
                       <h3>{p.registro?.user || "usuario desconocido"}</h3>
-                      <p style={{fontSize:"9px"}}>
+                      <p style={{ fontSize: "9px" }}>
                         {new Date(p.fecha).toLocaleDateString("es-CO", {
                           day: "numeric",
                           month: "short",
@@ -266,6 +272,8 @@ function Post() {
                     userId={userData?.id}
                     likes={p.likes || []}
                     onLikeChange={(newLikes) => handleLikeChange(p.id, newLikes)}
+                    postOwnerUserId={p.user_id}
+                    crearNotificacion={crearNotificacion}
                   />
                 </div>
               </div>

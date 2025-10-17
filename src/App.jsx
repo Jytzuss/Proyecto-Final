@@ -8,6 +8,7 @@ import Post from './componentes/Post';
 import PerfilPublico from './componentes/PerfilPublico';
 import AuthChecker from './componentes/AuthChecker';
 import Tendencia from './componentes/Tendencia';
+import Notificaciones from './pages/Notificaciones';
 
 function App() {
   const location = useLocation();
@@ -53,6 +54,17 @@ function App() {
             }
           />
         </Routes>
+
+        <Route path="/notificaciones" element={
+          <AuthChecker>
+            <Notificaciones
+              notifications={notifications}
+              onMarkAsRead={marcarComoLeida}
+              onClearAll={limpiarTodas}
+              marcarTodasComoLeidas={marcarTodasComoLeidas}
+            />
+          </AuthChecker>
+        } />
       </div>
 
     </>

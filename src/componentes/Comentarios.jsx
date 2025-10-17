@@ -8,7 +8,9 @@ function Comentarios({
   userName,
   userFoto,
   comentarios,
-  onComentarioAdded
+  onComentarioAdded,
+  postOwnerUserId,
+  crearNotificacion
 }) {
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,16 @@ function Comentarios({
           user_id: userId,
           contenido: nuevoComentario
         }]);
-
+        if (crearNotificacion && postOwnerUserId){
+          await crearNotificacion(
+            postOwnerUserId,
+            userId,
+            'comentario',
+            `${userName} comentó tu post`,
+            postId,
+            newComment?.id
+          )
+        }
       if (error) throw error;
 
       setNuevoComentario("");
