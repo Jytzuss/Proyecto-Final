@@ -13,7 +13,7 @@ function Tendencia() {
     import.meta.env.VITE_THENEWS_API_KEY_4,
   ].filter(Boolean);
 
-  const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
+  const [currentKeyIndex, setCurrentKeyIndex] = useState(1);
 
   const getApiKey = () => {
     return apiKeys[currentKeyIndex] || apiKeys[0];
