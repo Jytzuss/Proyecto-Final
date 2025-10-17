@@ -1,0 +1,87 @@
+.Menu{
+    text-align: center;
+    width: 300px;
+    text-align: center;
+    height: 100hv;
+}
+.ximg{
+    width: 150px;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #1da1f2;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu-toggle:hover {
+  background: rgba(29, 161, 242, 0.1);
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 40;
+}
+
+.menu-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: slideIn 0.3s ease forwards;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.menu-slide a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.menu-slide a:hover {
+  color: #1da1f2;
+}
+
+@media (max-width: 600px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-overlay {
+    display: block;
+  }
+}
+

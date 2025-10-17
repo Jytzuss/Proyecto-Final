@@ -1,0 +1,77 @@
+
+@media (max-width: 768px) {
+  .container_padre {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+  }
+
+  .container-perfil {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .foto-portada img,
+  .portada-default {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .perfil-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .foto-perfil-container img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .btn-editar-perfil {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .info-usuario {
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .estadisticas {
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .user-posts {
+    width: 100%;
+  }
+
+  .post-card {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 10px;
+  }
+
+  .post-imagee {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .Tendencia {
+    display: none;
+  }
+
+  .Menu {
+    width: 100%;
+  }
+  .post-content{
+    display: none;
+  }
+
+}

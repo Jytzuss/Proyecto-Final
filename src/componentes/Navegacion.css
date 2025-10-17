@@ -1,0 +1,45 @@
+.contenedor-nav{
+    width: 250px;
+    position: relative;
+}
+ul{
+    list-style: none;
+}
+
+li{
+    padding: 10px 0 0 15px;
+    display: flex;
+    cursor: pointer;
+    gap: 10px;
+    width: 200px;
+    text-align: left;
+    align-content: center;
+}
+
+li:hover{
+    background-color: rgba(149, 208, 231, 0.311);
+    border-radius: 50px;
+}
+.boton-post{
+    background-color: black;
+    color: white;
+    width: 210px;
+    border-radius: 25px;
+    height: 50px;
+}
+.info-user{
+    display: flex;
+    gap: 110px;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 35px;
+}
+.user{
+    display: flex;
+    gap: 15px;
+}
+.flex-nav{
+    display: flex;
+    gap: 70px;
+}
+

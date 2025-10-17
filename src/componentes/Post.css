@@ -1,0 +1,251 @@
+.container-padre {
+    border-left: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    width: 650px;
+}
+
+.tresvistas {
+    display: flex;
+}
+
+.container-padre p {
+    padding-left: 60px;
+}
+
+.cuadro_post {
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+.contai2 {
+    padding-top: 30px;
+}
+
+.input-post {
+    border: none;
+    width: 300px;
+    height: 60px;
+    outline: none;
+}
+
+.flex-uno {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.foto_perfil {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.foto_post {
+    margin: 0 0 0 60px;
+    border-radius: 30px;
+    width: 500px;
+}
+
+.cuadro-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.cuadro.contenido {
+    background: #fffffffb;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+}
+
+.cerrar-btn {
+    background-color: #000;
+    color: white;
+    width: 100px;
+    border-radius: 50px;
+    align-items: center;
+}
+
+input[type="file"] {
+    display: flex;
+}
+
+input:focus[type="file"] {
+    display: flex;
+    border: none;
+}
+
+.flex-posttt {
+    display: flex;
+    justify-content: center;
+    gap: 350px;
+}
+
+.btn-post {
+    background-color: rgb(177, 177, 177);
+    border-radius: 30px;
+    width: 100px;
+}
+
+.containerr-post {
+    text-align: left;
+}
+
+.img-user-text {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    gap: 10px;
+    padding: 0px;
+}
+.post-user-info{
+    flex:1;
+}
+.rodar-img{
+    margin: 0 0 0 10px;
+}
+.border1 {
+    display: flex;
+    gap: 10px;
+}
+
+.post-items {
+     border-top: 1px solid rgb(221, 221, 221);
+    width: auto;
+   padding: 20px 70px 10px 20px;
+}
+.post-header{
+    display: flex;
+}
+.like_comen{
+    display: flex;
+    padding-left: 50px;
+    justify-content: center;
+    gap: 300px;
+}
+
+
+@media screen and (min-width: 360px) and (max-width: 430px) {
+    .tresvistas {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .container-padre {
+        width: 100%;
+        border: none;
+        padding: 0 10px;
+    }
+
+    .cuadro_post {
+        border-bottom: 1px solid rgb(221, 221, 221);
+        padding: 10px;
+    }
+
+    .input-post {
+        width: 100%;
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .foto_perfil {
+        width: 40px;
+        height: 40px;
+    }
+
+    .foto_post {
+        margin: 0 0 0 59px;
+        width: 300px;
+        height: auto;
+        max-width: 400px;
+        border-radius: 16px;
+    }
+
+    .post-items {
+        text-align: left;
+        padding: 0;
+    }
+
+    .flex-posttt {
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .btn-post {
+        width: 80px;
+        height: 35px;
+        font-size: 13px;
+    }
+
+    .Tendencia {
+        display: none;
+    }
+
+    .Menu {
+        display: none;
+    }
+
+    .img-user-text {
+        padding-top: 10px;
+        gap: 7px;
+        display: flex;
+        align-items: center;
+    }
+
+
+    .rodar-img {
+        padding: 0 12px 0 0;
+    }
+
+    .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        flex-wrap: wrap;
+    }
+
+    .post-user-info {
+        flex: 1;
+    }
+
+    .post-header h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f1419;
+    }
+
+    
+
+    .post-header p {
+        margin: 0;
+        color: #536471;
+        font-size: 13px;
+    }
+
+    .post-content {
+        width: auto;
+        margin: 0;
+        padding: 0px 10px 0 0;
+        line-height: 1.5;
+    }
+
+    .post-content p {
+        margin: 0 0 0 0;
+        padding-bottom: 10px;
+    }
+    .post-items{
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+}

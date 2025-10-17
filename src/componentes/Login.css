@@ -1,0 +1,151 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+
+.Contenedor-loginnn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.Contenedor-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+}
+
+.imagen-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.imagen-login img {
+  max-width: 100%;
+  height: auto;
+  width: 300px;
+}
+
+
+.login {
+  flex: 1;
+  text-align: left;
+  max-width: 450px;
+}
+
+.login h1 {
+  color: black;
+  line-height: 52px;
+  letter-spacing: -0.8px;
+  font-size: 60px;
+}
+
+.login h2 {
+  color: black;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.login p {
+  font-size: 13px;
+}
+
+.boton-google,
+.boton-login,
+.boton-register {
+  width: 100%;
+  max-width: 350px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  background-color: white;
+  border: 1px solid rgba(196, 234, 251, 0.621);
+  gap: 7px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-google:hover,
+.boton-login:hover {
+  background-color: rgba(94, 96, 94, 0.409);
+  border: none;
+}
+
+.tyc {
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+.color {
+  color: rgb(11, 161, 220);
+  cursor: pointer;
+}
+
+.color:hover {
+  text-decoration: underline;
+}
+
+
+@media screen and (max-width: 768px) {
+  .Contenedor-loginnn {
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .Contenedor-login {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 430px;
+  }
+
+  .imagen-login img {
+    width: 70px;
+    margin: 40px 0 20px 0;
+  }
+
+  .login {
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .login h1 {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .login h2 {
+    font-size: 20px;
+  }
+
+  .tyc {
+    text-align: center;
+    font-size: 12px;
+  }
+}

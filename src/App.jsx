@@ -1,0 +1,61 @@
+import { useState, useEffect } from 'react'
+import './App.css'
+import Menu from './componentes/Menu';
+import Login from './componentes/Login'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Perfil from './componentes/Perfil';
+import Post from './componentes/Post';
+import PerfilPublico from './componentes/PerfilPublico';
+import AuthChecker from './componentes/AuthChecker';
+
+function App() {
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setIsLoggedIn(!!user);
+  }, [location]); // ✅ Agregar location para actualizar cuando cambie
+
+  const hideMenuRoutes = ["/", "/login", "/registro"];
+  const shouldHideMenu = hideMenuRoutes.includes(location.pathname.toLowerCase());
+
+  return (
+    <>
+
+      {!shouldHideMenu && isLoggedIn}
+      <div className="main-content">
+        <Routes>
+          <Route path='/' element={<Login />} />
+
+          {/* ✅ Envolver rutas protegidas con AuthChecker */}
+          <Route
+            path='/Home'
+            element={
+              <AuthChecker>
+                <Post />
+              </AuthChecker>
+            }
+          />
+
+          <Route
+            path='/perfil/:userId'
+            element={<PerfilPublico />}
+          />
+
+          <Route
+            path='/Perfil'
+            element={
+              <AuthChecker>
+                <Perfil />
+              </AuthChecker>
+            }
+          />
+        </Routes>
+      </div>
+
+    </>
+  )
+}
+
+export default App

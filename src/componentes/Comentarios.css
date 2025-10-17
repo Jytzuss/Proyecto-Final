@@ -1,0 +1,170 @@
+.comentarios-container {
+  padding: 16px 0;
+}
+
+.comentario-form {
+  display: flex;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eff3f4;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.form-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comentario-input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: inherit;
+  color: #0f1419;
+  background: transparent;
+  border-bottom: 1px solid #eff3f4;
+  padding: 8px 0;
+  resize: none;
+}
+
+.comentario-input::placeholder {
+  color: #536471;
+}
+
+.comentario-input:focus {
+  border-bottom-color: #1da1f2;
+}
+
+.reply-btn {
+  background: #1da1f2;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+
+.reply-btn:hover:not(:disabled) {
+  background: #1a8cd8;
+}
+
+.reply-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.comentarios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.no-comentarios {
+  text-align: center;
+  color: #536471;
+  padding: 24px;
+  font-size: 15px;
+}
+
+.comentario-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eff3f4;
+}
+
+.comentario-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.comentario-content {
+  flex: 1;
+}
+
+.comentario-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.comentario-header h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1419;
+}
+
+.comentario-header p {
+  margin: 0;
+  font-size: 15px;
+  color: #536471;
+}
+
+.separador {
+  color: #536471;
+}
+
+.comentario-fecha {
+  font-size: 13px !important;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #f91880;
+  cursor: pointer;
+  padding: 0 8px;
+  font-size: 16px;
+  transition: opacity 0.2s;
+  margin-left: auto;
+}
+
+.delete-btn:hover {
+  opacity: 0.8;
+}
+
+.comentario-texto {
+  margin: 8px 0 0 0;
+  line-height: 1.5;
+  color: #0f1419;
+  word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .comentario-form {
+    flex-direction: column;
+  }
+
+  .comentario-header {
+    gap: 4px;
+  }
+
+  .comentario-header h4 {
+    font-size: 14px;
+  }
+
+  .reply-btn {
+    align-self: flex-end;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

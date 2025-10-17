@@ -1,0 +1,22 @@
+.iniciar-google{
+      margin-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: white;
+    border: 1px solid rgba(7, 7, 7, 0.621);
+    border-radius: 20px;
+    height: 35px;
+    width: 250px;
+    gap: 7px;
+}
+.iniciar-google:hover{
+    border: 1px solid rgb(96, 37, 37);
+}
+.next-login{
+    width: 300px;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+}
