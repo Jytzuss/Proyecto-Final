@@ -30,7 +30,7 @@ function App() {
 
           {/* ✅ Envolver rutas protegidas con AuthChecker */}
           <Route
-            path='/Home'
+            path='/home'
             element={
               <AuthChecker>
                 <Post />
@@ -44,7 +44,7 @@ function App() {
           />
 
           <Route
-            path='/Perfil'
+            path='/perfil'
             element={
               <AuthChecker>
                 <Perfil />
