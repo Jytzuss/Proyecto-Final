@@ -66,7 +66,7 @@
   color: #999;
   font-size: 0.8rem;
 }
-.back_fecha{
+.back_flecha{
   display: none;
 }
 
@@ -122,7 +122,7 @@
   .hora {
     font-size: 0.8rem;
   }
-  .back_fecha{
+  .back_flecha{
  display: flex;
 }
 }
