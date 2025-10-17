@@ -232,7 +232,7 @@ function Post() {
                       style={{ cursor: "pointer" }}
                     >
                       <h3>{p.registro?.user || "usuario desconocido"}</h3>
-                      <p>
+                      <p style={{fontSize:"9px"}}>
                         {new Date(p.fecha).toLocaleDateString("es-CO", {
                           day: "numeric",
                           month: "short",
