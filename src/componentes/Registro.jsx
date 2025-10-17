@@ -214,21 +214,20 @@ function Registro({ setShowModal }) {
               onChange={handleFileChange}
             />
             <br />
-
             <button className='next' disabled={loading}>
               {loading ? 'Enviando...' : 'Siguiente'}
             </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyCode}>
-            <h5>Ingresa el CODIGO de verificacion de dos pasos</h5>
+            <h5>Ingresa el CODIGO de verificacion de dos pasos</h5> <br />
             <input
               type="number"
               className='input-check'
               placeholder="Código de verificación"
               value={codigo}
               onChange={(e) => setCodigo(e.target.value)}
-            /> <br /> <br />
+            /> <br /> <br /> <br />
             <button className='next' disabled={loading}>
               {loading ? 'Verificando...' : 'Verificar'}
             </button>

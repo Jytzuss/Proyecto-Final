@@ -77,23 +77,21 @@ function Login() {
       </div>
 
       <div className='login'>
-        <h1>Lo que está <br />pasando ahora</h1>
-        <h2>Únete Hoy</h2>
+        <h1>Lo que está <br />pasando ahora</h1> <br />
+        <h2>Únete Hoy</h2> <br />
 
         <button className='boton-google' onClick={handleGoogleLogin}>
           <img src="google.svg" width={19} height={19} alt="" />
           <p>Registrarse con Google</p>
         </button>
-
-        <p>O</p>
+        <p className="tyc">O</p>
         <button className='boton-register' onClick={() => setShowModal(true)}>
           Crear cuenta
-        </button>
+        </button> <br />
 
         <p className='tyc'>
           Al registrarte, aceptas los <span className="color">Términos de servicio</span> y <span className="color">la Política de <br /> privacidad</span>, incluida la política de <span className="color">Uso de Cookies</span>.
-        </p>
-
+        </p> <br />
         <br />
         <h3>¿Ya tienes una cuenta?</h3>
         <button className='boton-login' onClick={() => setShowLoginModal(true)}>

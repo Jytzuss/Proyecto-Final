@@ -115,24 +115,16 @@ function PerfilPublico() {
         {/* Información del usuario */}
         <div className='info-usuario'>
           <h2>{userData?.user}</h2>
-
-          {userData?.bio && (
-            <p className='bio'>{userData.bio}</p>
-          )}
-
-          <div className='detalles-usuario'>
-            {userData?.numero && (
-              <p>+57 {userData.numero}</p>
-            )}
-            <p>
+           <p>
               Se unió en {userData?.created_at ? new Date(userData.created_at).toLocaleDateString("es-CO", {
                 month: "long",
                 year: "numeric"
               }) : ""}
             </p>
-          </div>
+          {userData?.bio && (
+            <p className='bio'>{userData.bio}</p>
+          )}
 
-          {/* Estadísticas */}
           <div className='estadisticas'>
             <div className='stat'>
               <strong>{userPosts.length}</strong>
@@ -186,9 +178,8 @@ function PerfilPublico() {
                     </div>
                   </div> 
                   <div className="post-content">
+                  </div> <br />
                     <p>{post.contenido}</p>
-                  </div>
-
                   {post.imagen_url && (
                     post.tipo === "video" ? (
                       <video src={post.imagen_url} controls width={400} height={500} style={{ marginLeft: "100px" }} className="post-imagee" />

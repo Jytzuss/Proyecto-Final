@@ -249,9 +249,8 @@ function Post() {
                   onClick={() => setSelectedPost(p)}
                   style={{ cursor: "pointer" }}
                 >
-                  <p>{p.contenido}</p>
                 </div>
-
+                  <p>{p.contenido}</p>
                 {p.imagen_url && (
                   p.tipo === "video" ? (
                     <video src={p.imagen_url} controls width="100%" className="foto_post" />

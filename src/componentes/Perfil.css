@@ -68,7 +68,7 @@
   font-size: 15px;
 }
 
-/* Reduce padding del botón */
+
 .btn-editar-perfil {
   padding: 8px 16px;
   font-size: 14px;
@@ -128,7 +128,7 @@
   background: #f7f7f7;
 }
 
-/* Información del usuario */
+
 .info-usuario {
   padding: 20px;
 }
@@ -175,7 +175,7 @@
   color: #666;
 }
 
-/* Posts */
+
 .seccion-posts {
   padding: 20px;
 }
@@ -275,7 +275,7 @@
   display: flex;
 }
 
-/* --- MODO RESPONSIVE PARA POST DETAIL (versión móvil) --- */
+
 @media (max-width: 600px) {
   .post-detail-overlay {
     align-items: flex-end;
@@ -360,6 +360,13 @@
 
   .post-card {
     width: 100%;
+  }
+  .post-imagee{
+    width: 100px;
+  }
+  .post-content{
+    display: flex;
+    background-color: #764ba2;
   }
 
 }
