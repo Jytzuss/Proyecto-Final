@@ -28,7 +28,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
 
-          {/* ✅ Envolver rutas protegidas con AuthChecker */}
           <Route
             path='/home'
             element={
