@@ -81,7 +81,7 @@ function Tendencia() {
 
   return (
     <div className="container-tendencia">
-      <a href="/home"><img src="/arrow.svg" alt="" /></a>
+      <a href="/home"><img src="/arrow.svg" style={{marginRight:"80px", width:"30px"}} alt="" /></a>
       <div>
         <form onSubmit={buscarNoticias}>
           <div>
