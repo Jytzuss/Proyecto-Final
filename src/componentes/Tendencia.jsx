@@ -42,7 +42,7 @@ function Tendencia() {
   };
 
   const cargarNoticias = async () => {
-    const url = `https://gnews.io/api/v4/top-headlines?lang=es&country=co&max=5`;
+    const url = `https://gnews.io/api/v4/search?q=tendencias&lang=es&country=co&max=5`;
     const data = await fetchConRotacion(url);
     setNoticias(data.articles || []);
   };
