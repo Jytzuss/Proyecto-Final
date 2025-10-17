@@ -13,7 +13,7 @@ function Login() {
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "http://localhost:5173/home" }
+      options: { redirectTo: "${window.location.origin}/home" }
     });
 
     if (error) {
