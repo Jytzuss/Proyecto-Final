@@ -8,11 +8,11 @@ function Tendencia() {
   const [modoBusqueda, setModoBusqueda] = useState(false);
 
   const apiKeys = [
-    import.meta.env.VITE_GNEWS_API_KEY,
-    import.meta.env.VITE_GNEWS_API_KEY_2,
-    import.meta.env.VITE_GNEWS_API_KEY_3,
-    import.meta.env.VITE_GNEWS_API_KEY_4,
-  ].filter(Boolean); 
+    import.meta.env.VITE_THENEWS_API_KEY_1,
+    import.meta.env.VITE_THENEWS_API_KEY_2,
+    import.meta.env.VITE_THENEWS_API_KEY_3,
+    import.meta.env.VITE_THENEWS_API_KEY_4,
+  ].filter(Boolean);
 
   const [apiIndex, setApiIndex] = useState(0);
 
@@ -21,15 +21,14 @@ function Tendencia() {
       const apiKey = apiKeys[(apiIndex + i) % apiKeys.length];
       if (!apiKey) continue;
 
-      const finalUrl = `${url}&apikey=${apiKey}`;
+      const finalUrl = `${url}&api_token=${apiKey}`;
 
       try {
-        const res = await fetch(finalUrl).catch(() => null);
+        const res = await fetch(finalUrl);
+        if (!res.ok) continue;
 
-        if (!res || !res.ok) continue;
-
-        const data = await res.json().catch(() => null);
-        if (!data?.articles) continue;
+        const data = await res.json();
+        if (!data?.data) continue;
 
         setApiIndex((apiIndex + i) % apiKeys.length);
         return data;
@@ -37,14 +36,13 @@ function Tendencia() {
         continue;
       }
     }
-
-    return { articles: [] };
+    return { data: [] };
   };
 
   const cargarNoticias = async () => {
-    const url = `https://gnews.io/api/v4/search?q=tendencias&lang=es&country=co&max=5`;
+    const url = `https://api.thenewsapi.com/v1/news/top?locale=es-CO&limit=5`;
     const data = await fetchConRotacion(url);
-    setNoticias(data.articles || []);
+    setNoticias(data.data || []);
   };
 
   const buscarNoticias = async (e) => {
@@ -53,12 +51,10 @@ function Tendencia() {
     setCargando(true);
     setModoBusqueda(true);
 
-    const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(
-      busqueda
-    )}&lang=es&country=co&max=6`;
+    const url = `https://api.thenewsapi.com/v1/news/all?locale=es-CO&limit=6&search=${encodeURIComponent(busqueda)}`;
 
     const data = await fetchConRotacion(url);
-    setNoticias(data.articles || []);
+    setNoticias(data.data || []);
     setCargando(false);
   };
 
@@ -72,7 +68,7 @@ function Tendencia() {
     cargarNoticias();
   }, []);
 
-  console.log(" API Keys cargadas:", apiKeys);
+  console.log("API Keys cargadas:", apiKeys);
 
   return (
     <div className="container-tendencia">
@@ -101,7 +97,7 @@ function Tendencia() {
       <br />
 
       <div className="cuadro-tendencia">
-        <h3>Tendencias de Hoy</h3>
+        <h3>{modoBusqueda ? "Resultados de búsqueda" : "Tendencias de Hoy"}</h3>
         {noticias.length === 0 && <p>Cargando noticias...</p>}
         {noticias.map((n, i) => (
           <div key={i} className="tendencia-item">
@@ -113,13 +109,13 @@ function Tendencia() {
             >
               {n.title}
             </a>
-            <p className="fuente">{n.source?.name}</p>
+            <p className="fuente">{n.source}</p>
             <p className="hora">
-              {new Date(n.publishedAt).toLocaleTimeString("es-CO", {
+              {new Date(n.published_at).toLocaleTimeString("es-CO", {
                 hour: "2-digit",
                 minute: "2-digit",
               })}{" "}
-              · {new Date(n.publishedAt).toLocaleDateString("es-CO")}
+              · {new Date(n.published_at).toLocaleDateString("es-CO")}
             </p>
           </div>
         ))}
