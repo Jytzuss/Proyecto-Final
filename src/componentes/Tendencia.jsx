@@ -11,7 +11,6 @@ function Tendencia() {
     import.meta.env.VITE_THENEWS_API_KEY_2,
     import.meta.env.VITE_THENEWS_API_KEY_3,
     import.meta.env.VITE_THENEWS_API_KEY_4,
-
   ].filter(Boolean);
 
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
@@ -30,7 +29,7 @@ function Tendencia() {
       const res = await fetch(url);
       const data = await res.json();
 
-      if (res.status === 429 || data.meta?.status === 429) {
+      if (res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) {
         rotateApiKey();
         return cargarNoticias();
       }
@@ -52,7 +51,7 @@ function Tendencia() {
       const res = await fetch(url);
       const data = await res.json();
 
-      if (res.status === 429 || data.meta?.status === 429) {
+      if (res.status === 429 || res.status === 402 || data.meta?.status === 429 || data.meta?.status === 402) {
         rotateApiKey();
         setCargando(false);
         return buscarNoticias(e);
