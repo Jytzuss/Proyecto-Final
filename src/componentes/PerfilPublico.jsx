@@ -14,6 +14,9 @@ function PerfilPublico() {
   const [userData, setUserData] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [activeTab, setActiveTab] = useState("for-you");
+  const [followingIds, setFollowingIds] = useState([]);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [counts, setCounts] = useState({ seguidores: 0, siguiendo: 0 });
 
@@ -34,6 +37,30 @@ function PerfilPublico() {
 
     setUserData(data);
   };
+
+  useEffect(() => {
+    const loadFollowing = async () => {
+      if (!userData?.id) return;
+
+      const { data } = await supabase
+        .from("seguidores")
+        .select("seguido_id")
+        .eq("seguidor_id", userData.id);
+
+      const ids = data?.map(s => s.seguido_id) || [];
+      setFollowingIds(ids);
+    };
+
+    loadFollowing();
+  }, [userData?.id]);
+
+  useEffect(() => {
+    if (activeTab === "for-you") {
+      setFilteredPosts(posts);
+    } else if (activeTab === "following") {
+      setFilteredPosts(posts.filter(post => followingIds.includes(post.user_id)));
+    }
+  }, [posts, activeTab, followingIds]);
 
   const loadUserPosts = async () => {
     const { data, error } = await supabase
@@ -82,7 +109,7 @@ function PerfilPublico() {
       <div className='container-perfil'>
         <p><a href="/home"><img src="/arrow.svg" width={40} alt="" /></a></p>
 
- 
+
         <div className='foto-portada'>
           {userData?.foto_portada ? (
             <img src={userData.foto_portada} alt="Portada" />
@@ -115,12 +142,12 @@ function PerfilPublico() {
 
         <div className='info-usuario'>
           <h2>{userData?.user}</h2>
-           <p>
-              Se unió en {userData?.created_at ? new Date(userData.created_at).toLocaleDateString("es-CO", {
-                month: "long",
-                year: "numeric"
-              }) : ""}
-            </p>
+          <p>
+            Se unió en {userData?.created_at ? new Date(userData.created_at).toLocaleDateString("es-CO", {
+              month: "long",
+              year: "numeric"
+            }) : ""}
+          </p>
           {userData?.bio && (
             <p className='bio'>{userData.bio}</p>
           )}
@@ -157,32 +184,32 @@ function PerfilPublico() {
                   className="post-card"
                   onClick={() => setSelectedPost(post)}
                   style={{ cursor: "pointer" }}>
-                    <div style={{justifyContent:"space-between", display:"flex", gap:"20px"}}>
-                    <div style={{display:"flex", gap:"7px"}}>
+                  <div style={{ justifyContent: "space-between", display: "flex", gap: "20px" }}>
+                    <div style={{ display: "flex", gap: "7px" }}>
                       <img
-                      src={userData?.foto_perfil}
-                      alt=""
-                      style={{borderRadius:"50px"}}
-                      width={50}
-                      height={50}
-                      className="post-user-avatar" />
-                    <h4>{userData?.user}</h4>
+                        src={userData?.foto_perfil}
+                        alt=""
+                        style={{ borderRadius: "50px" }}
+                        width={50}
+                        height={50}
+                        className="post-user-avatar" />
+                      <h4>{userData?.user}</h4>
                     </div>
                     <div>
-                      <p style={{fontSize:"9px"}}>{new Date(post.fecha).toLocaleDateString("es-CO", {
+                      <p style={{ fontSize: "9px" }}>{new Date(post.fecha).toLocaleDateString("es-CO", {
                         day: "numeric",
                         month: "long",
                         hour: "2-digit",
                         minute: "2-digit"
                       })}</p>
                     </div>
-                  </div> 
+                  </div>
                   <div className="post-content">
                   </div> <br />
-                    <p>{post.contenido}</p>
+                  <p>{post.contenido}</p>
                   {post.imagen_url && (
                     post.tipo === "video" ? (
-                      <video src={post.imagen_url} controls width={400} height={500}  className="post-imagee" />
+                      <video src={post.imagen_url} controls width={400} height={500} className="post-imagee" />
                     ) : (
                       <img src={post.imagen_url} alt="" width={500} className="post-imagee" />
                     )

@@ -5,27 +5,29 @@ import supabase from "../supabaseClient";
 
 
 
-function Header() {
+function Header({ activeTab = "for-you", setActiveTab }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [activeTab, setActiveTab] = useState("for-you");
 
- const handleLogout = async () => {
-  try {
-    await supabase.auth.signOut();
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
 
-    localStorage.removeItem("user");
-    localStorage.clear();
+      localStorage.removeItem("user");
+      localStorage.clear();
 
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 300);
-  } catch (error) {
-    console.error("Error al cerrar sesión:", error.message);
-  }
-};
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 300);
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error.message);
+    }
+  };
 
   const toggleMenu = () => setShowMenu(!showMenu);
-  const handleTabClick = (tab) => setActiveTab(tab);
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    setShowMenu(false);
+  };
   const closeMenu = () => setShowMenu(false);
 
   return (
@@ -61,7 +63,7 @@ function Header() {
 
       {showMenu && (
         <div className='menu-slide'>
-          <button 
+          <button
             className='close-menu-btn'
             onClick={closeMenu}
             title='Cerrar menú'>✕</button>

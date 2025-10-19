@@ -19,6 +19,9 @@ function Post() {
   const [userData, setUserData] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const navigate = useNavigate();
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [activeTab, setActiveTab] = useState("for-you");
+  const [followingIds, setFollowingIds] = useState([]);
 
   useEffect(() => {
     const loadUser = () => {
@@ -65,6 +68,31 @@ function Post() {
 
     loadPosts();
   }, []);
+
+  useEffect(() => {
+    const loadFollowing = async () => {
+      if (!userData?.id) return;
+
+      const { data } = await supabase
+        .from("seguidores")
+        .select("seguido_id")
+        .eq("seguidor_id", userData.id);
+
+      const ids = data?.map(s => s.seguido_id) || [];
+      setFollowingIds(ids);
+    };
+
+    loadFollowing();
+  }, [userData?.id]);
+
+
+  useEffect(() => {
+    if (activeTab === "for-you") {
+      setFilteredPosts(posts);
+    } else if (activeTab === "following") {
+      setFilteredPosts(posts.filter(post => followingIds.includes(post.user_id)));
+    }
+  }, [posts, activeTab, followingIds]);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -150,7 +178,7 @@ function Post() {
     <div className="tresvistas">
       <Menu />
       <div className="container-padre">
-        <Header />
+        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="container-post">
           {preview && (
             <div className="cuadro-modal">
@@ -210,69 +238,76 @@ function Post() {
 
         <div className="contai-posts">
           <div className="containerr-post">
+            {filteredPosts.length === 0 ? (
+              <p className="no-posts">
+                {activeTab === "following"
+                  ? "No hay posts de las personas que sigues"
+                  : "No hay posts"}
+              </p>
+            ) : (
+              filteredPosts.map((p) => (
+                <div key={p.id} className="post-items">
+                  <div className="img-user-text">
+                    <div className="rodar-img">
+                      <img
+                        src={p.registro?.foto_perfil || "/user.svg"}
+                        className="foto_perfil"
+                        alt=""
+                        onClick={() => navigate(`/perfil/${p.registro?.id}`)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
 
-
-            {posts.map((p) => (
-              <div key={p.id} className="post-items">
-                <div className="img-user-text">
-                  <div className="rodar-img">
-                    <img
-                      src={p.registro?.foto_perfil || "/user.svg"}
-                      className="foto_perfil"
-                      alt=""
-                      onClick={() => navigate(`/perfil/${p.registro?.id}`)}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-
-                  <div className="post-user-info">
-                    <div
-                      className="post-header"
-                      onClick={() => navigate(`/perfil/${p.registro?.id}`)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <h3>{p.registro?.user || "usuario desconocido"}</h3>
-                      <p style={{fontSize:"9px"}}>
-                        {new Date(p.fecha).toLocaleDateString("es-CO", {
-                          day: "numeric",
-                          month: "short",
-                          hour: "2-digit",
-                          minute: "2-digit"
-                        })}
-                      </p>
+                    <div className="post-user-info">
+                      <div
+                        className="post-header"
+                        onClick={() => navigate(`/perfil/${p.registro?.id}`)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <h3>{p.registro?.user || "usuario desconocido"}</h3>
+                        <p style={{ fontSize: "9px" }}>
+                          {new Date(p.fecha).toLocaleDateString("es-CO", {
+                            day: "numeric",
+                            month: "short",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                          })}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div
-                  className="post-content"
-                  onClick={() => setSelectedPost(p)}
-                  style={{ cursor: "pointer" }}><p>{p.contenido}</p></div>
-                {p.imagen_url && (
-                  p.tipo === "video" ? (
-                    <video src={p.imagen_url} controls width="100%" className="foto_post" />
-                  ) : (
-                    <img src={p.imagen_url} alt="" className="foto_post" />
-                  )
-                )}
+                  <div
+                    className="post-content"
+                    onClick={() => setSelectedPost(p)}
+                    style={{ cursor: "pointer" }}><p>{p.contenido}</p></div>
+                  {p.imagen_url && (
+                    p.tipo === "video" ? (
+                      <video src={p.imagen_url} controls width="100%" className="foto_post" />
+                    ) : (
+                      <img src={p.imagen_url} alt="" className="foto_post" />
+                    )
+                  )}
 
-                <div className="like_comen">
-                  <div className="comen-count">
-                    <img src="chat.svg" width={15} alt="" />
-                    <span>{p.comentarios?.length || 0}</span>
+                  <div className="like_comen">
+                    <div className="comen-count">
+                      <img src="chat.svg" width={15} alt="" />
+                      <span>{p.comentarios?.length || 0}</span>
+                    </div>
+                    <Likes
+                      postId={p.id}
+                      userId={userData?.id}
+                      likes={p.likes || []}
+                      onLikeChange={(newLikes) => handleLikeChange(p.id, newLikes)}
+                    />
                   </div>
-                  <Likes
-                    postId={p.id}
-                    userId={userData?.id}
-                    likes={p.likes || []}
-                    onLikeChange={(newLikes) => handleLikeChange(p.id, newLikes)}
-                  />
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
-      </div>
+        </div>
+
 
       <div className="Tendencia">
         <Tendencia />
