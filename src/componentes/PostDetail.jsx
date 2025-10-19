@@ -58,7 +58,7 @@ function PostDetail({ post, onClose, userData }) {
             <p>{post.contenido}</p>
             {post.imagen_url && (
               post.tipo === "video" ? (
-                <video src={post.imagen_url} controls width={400} height={500} style={{ marginLeft: "100px" }} className="post-imagee" />
+                <video src={post.imagen_url} controls width={400} height={500} className="post-imagee" />
               ) : (
                 <img src={post.imagen_url} alt="" width="100%" className="post-imagee" />
               )
