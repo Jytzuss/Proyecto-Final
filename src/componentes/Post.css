@@ -81,7 +81,7 @@ input[type="file"] {
 
 input:focus[type="file"] {
     display: flex;
-    border: none;
+    border: 1px solid black;
 }
 
 .flex-posttt {

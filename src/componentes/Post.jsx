@@ -207,7 +207,7 @@ function Post() {
                 <input
                   type="text"
                   className="input-post"
-                  placeholder="¿Qué estás haciendo?"
+                  placeholder="Publica algo"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                 />
@@ -229,7 +229,7 @@ function Post() {
               </div>
               <div>
                 <button className="btn-post" onClick={handlePostt}>
-                  Post
+                  Publicar
                 </button>
               </div>
             </div>

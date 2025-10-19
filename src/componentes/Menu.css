@@ -7,7 +7,17 @@
 .ximg{
     width: 150px;
 }
+li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
 
+li a p {
+  margin: 0;
+}
 .menu-toggle {
   display: none;
   background: none;

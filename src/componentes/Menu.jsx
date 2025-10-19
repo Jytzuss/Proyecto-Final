@@ -16,21 +16,21 @@ function Menu() {
 
 
   useEffect(() => {
-  const loadUser = () => {
-    const localUser = JSON.parse(localStorage.getItem("user"));
-    if (!localUser) {
-      return;
-    }
+    const loadUser = () => {
+      const localUser = JSON.parse(localStorage.getItem("user"));
+      if (!localUser) {
+        return;
+      }
 
-    setUserData({
-      id: localUser.id,
-      user: localUser.user,
-      foto_perfil: localUser.foto_perfil
-    });
-  };
+      setUserData({
+        id: localUser.id,
+        user: localUser.user,
+        foto_perfil: localUser.foto_perfil
+      });
+    };
 
-  loadUser();
-}, []);
+    loadUser();
+  }, []);
 
 
   return (
@@ -41,17 +41,52 @@ function Menu() {
             <div> <br />
               <div className='ximg'><img src="X.svg" width={25} alt="" /></div> <br />
               <ul>
-                <li><a href="/Home" onClick={()=> window.location.reload}><img src="/home.svg" width={40} alt="" /></a><p>Home</p></li> <br />
-                <li><img src="/search.svg" width={40} alt="" /><p>Explorer</p></li> <br />
-                <li><img src="/notificacion.svg" width={40} alt="" /><p>Notifications</p></li> <br />
-                <li><img src="/message.svg" width={40} alt="" /><p>Messages</p></li> <br />
-                <li><a href="/Perfil" onClick={()=> window.location.reload}><img src="/profile.svg" width={40} alt="" /></a><p>Profile</p></li> <br />
-                <li><img src="/more.svg" width={40} alt="" /><p>More</p></li> <br />
-            <div>
-              <button className='boton-post'>Post</button>
-            </div>
-              </ul>
-            </div>
+                <li>
+                  <a href="/Home" onClick={() => window.location.reload()}>
+                    <img src="/home.svg" width={40} alt="" />
+                    <p>Home</p>
+                  </a>
+                </li> <br />
+
+                <li>
+                  <a href="/Explorer">
+                    <img src="/search.svg" width={40} alt="" />
+                    <p>Explorer</p>
+                  </a>
+                </li> <br />
+
+                <li>
+                  <a href="/Notifications">
+                    <img src="/notificacion.svg" width={40} alt="" />
+                    <p>Notifications</p>
+                  </a>
+                </li> <br />
+
+                <li>
+                  <a href="/Messages">
+                    <img src="/message.svg" width={40} alt="" />
+                    <p>Messages</p>
+                  </a>
+                </li> <br />
+
+                <li>
+                  <a href="/Perfil" onClick={() => window.location.reload()}>
+                    <img src="/profile.svg" width={40} alt="" />
+                    <p>Profile</p>
+                  </a>
+                </li> <br />
+
+                <li>
+                  <a href="/More">
+                    <img src="/more.svg" width={40} alt="" />
+                    <p>More</p>
+                  </a>
+                </li> <br />
+
+                <div>
+                  <button className='boton-post'>Post</button>
+                </div>
+              </ul>            </div>
 
             <br /> <br /> <br /> <br />
 
@@ -68,8 +103,8 @@ function Menu() {
               </div>
             </div>
             <div>
-                <button onClick={handleLogout}><img src="/cerrarsesion.svg" alt="" /></button>
-              </div>
+              <button onClick={handleLogout}><img src="/cerrarsesion.svg" alt="" /></button>
+            </div>
           </div>
         </div>
       </div>
