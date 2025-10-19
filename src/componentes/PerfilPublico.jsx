@@ -14,9 +14,6 @@ function PerfilPublico() {
   const [userData, setUserData] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [activeTab, setActiveTab] = useState("for-you");
-  const [followingIds, setFollowingIds] = useState([]);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [counts, setCounts] = useState({ seguidores: 0, siguiendo: 0 });
 
@@ -37,30 +34,6 @@ function PerfilPublico() {
 
     setUserData(data);
   };
-
-  useEffect(() => {
-    const loadFollowing = async () => {
-      if (!userData?.id) return;
-
-      const { data } = await supabase
-        .from("seguidores")
-        .select("seguido_id")
-        .eq("seguidor_id", userData.id);
-
-      const ids = data?.map(s => s.seguido_id) || [];
-      setFollowingIds(ids);
-    };
-
-    loadFollowing();
-  }, [userData?.id]);
-
-  useEffect(() => {
-    if (activeTab === "for-you") {
-      setFilteredPosts(posts);
-    } else if (activeTab === "following") {
-      setFilteredPosts(posts.filter(post => followingIds.includes(post.user_id)));
-    }
-  }, [posts, activeTab, followingIds]);
 
   const loadUserPosts = async () => {
     const { data, error } = await supabase
@@ -109,7 +82,6 @@ function PerfilPublico() {
       <div className='container-perfil'>
         <p><a href="/home"><img src="/arrow.svg" width={40} alt="" /></a></p>
 
-
         <div className='foto-portada'>
           {userData?.foto_portada ? (
             <img src={userData.foto_portada} alt="Portada" />
@@ -117,7 +89,6 @@ function PerfilPublico() {
             <div className='portada-default'></div>
           )}
         </div>
-
 
         <div className='perfil-header'>
           <div className='foto-perfil-container'>
@@ -138,7 +109,6 @@ function PerfilPublico() {
             />
           )}
         </div>
-
 
         <div className='info-usuario'>
           <h2>{userData?.user}</h2>
@@ -169,7 +139,6 @@ function PerfilPublico() {
         </div>
 
         <hr />
-
 
         <div className='seccion-posts'>
           <h3>Posts</h3>
@@ -224,7 +193,6 @@ function PerfilPublico() {
           </div>
         </div>
       </div>
-
 
       {selectedPost && (
         <PostDetail
